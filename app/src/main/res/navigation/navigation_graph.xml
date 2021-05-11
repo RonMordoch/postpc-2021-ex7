@@ -9,5 +9,39 @@
         android:id="@+id/newOrderFragment"
         android:name="exercises.android.ronm.makemysandwich.NewOrderFragment"
         android:label="fragment_new_order"
-        tools:layout="@layout/fragment_new_order" />
+        tools:layout="@layout/fragment_new_order" >
+        <action
+            android:id="@+id/action_newOrderFragment_to_editOrderFragment"
+            app:destination="@id/editOrderFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editOrderFragment"
+        android:name="exercises.android.ronm.makemysandwich.EditOrderFragment"
+        android:label="fragment_edit_order"
+        tools:layout="@layout/fragment_edit_order" >
+        <action
+            android:id="@+id/action_editOrderFragment_to_orderInProgressFragment"
+            app:destination="@id/orderInProgressFragment" />
+        <action
+            android:id="@+id/action_editOrderFragment_to_newOrderFragment2"
+            app:destination="@id/newOrderFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/orderInProgressFragment"
+        android:name="exercises.android.ronm.makemysandwich.OrderInProgressFragment"
+        android:label="fragment_order_in_progress"
+        tools:layout="@layout/fragment_order_in_progress" >
+        <action
+            android:id="@+id/action_orderInProgressFragment_to_orderReadyFragment"
+            app:destination="@id/orderReadyFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/orderReadyFragment"
+        android:name="exercises.android.ronm.makemysandwich.OrderReadyFragment"
+        android:label="fragment_order_ready"
+        tools:layout="@layout/fragment_order_ready" >
+        <action
+            android:id="@+id/action_orderReadyFragment_to_newOrderFragment"
+            app:destination="@id/newOrderFragment" />
+    </fragment>
 </navigation>
