@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
 /**
@@ -14,16 +16,20 @@ import android.view.ViewGroup
  */
 class EditOrderFragment : Fragment() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_edit_order, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val fabDeleteOrder : FloatingActionButton = view.findViewById(R.id.fabDeleteOrder)
+        fabDeleteOrder.setOnClickListener {
+            view.findNavController().navigate(R.id.action_editOrderFragment_to_newOrderFragment2)
+        }
     }
 
 }

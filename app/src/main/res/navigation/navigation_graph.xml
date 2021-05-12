@@ -12,7 +12,9 @@
         tools:layout="@layout/fragment_new_order" >
         <action
             android:id="@+id/action_newOrderFragment_to_editOrderFragment"
-            app:destination="@id/editOrderFragment" />
+            app:destination="@id/editOrderFragment"
+            app:popUpTo="@id/newOrderFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/editOrderFragment"
@@ -21,7 +23,9 @@
         tools:layout="@layout/fragment_edit_order" >
         <action
             android:id="@+id/action_editOrderFragment_to_orderInProgressFragment"
-            app:destination="@id/orderInProgressFragment" />
+            app:destination="@id/orderInProgressFragment"
+            app:popUpTo="@id/editOrderFragment"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_editOrderFragment_to_newOrderFragment2"
             app:destination="@id/newOrderFragment" />
@@ -33,7 +37,9 @@
         tools:layout="@layout/fragment_order_in_progress" >
         <action
             android:id="@+id/action_orderInProgressFragment_to_orderReadyFragment"
-            app:destination="@id/orderReadyFragment" />
+            app:destination="@id/orderReadyFragment"
+            app:popUpTo="@id/orderInProgressFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/orderReadyFragment"
