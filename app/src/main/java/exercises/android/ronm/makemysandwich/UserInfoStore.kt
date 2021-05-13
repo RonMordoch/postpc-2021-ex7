@@ -19,8 +19,8 @@ class UserInfoStore(context: Context) {
             field = value
             saveToSP()
         }
-    private var sp: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
-
+    private val sp: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+//    private val firestore
     init {
         loadFromSP()
     }

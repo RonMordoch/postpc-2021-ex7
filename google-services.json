@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1068765983376",
+    "project_id": "makemysandwich-a1d67",
+    "storage_bucket": "makemysandwich-a1d67.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1068765983376:android:a1fee8b4b2c1a6e7201e15",
+        "android_client_info": {
+          "package_name": "exercises.android.ronm.makemysandwich"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1068765983376-ec72bi1tvqhnqaruhld5qd7jnl79klre.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAccLnCF2whQcJjYYCl5baiVK7HSjO9gZI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1068765983376-ec72bi1tvqhnqaruhld5qd7jnl79klre.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
