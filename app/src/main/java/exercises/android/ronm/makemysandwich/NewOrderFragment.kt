@@ -139,6 +139,7 @@ class NewOrderFragment : Fragment(R.layout.fragment_new_order) {
         // save the created order id
         appContext.info.orderId = order.orderId
         // TODO upload order info to firestore
+        appContext.info.addOrder(order)
     }
 
     private fun disableOrderViews() {
