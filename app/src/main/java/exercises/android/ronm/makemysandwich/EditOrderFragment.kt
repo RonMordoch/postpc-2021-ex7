@@ -49,11 +49,15 @@ class EditOrderFragment : Fragment() {
         editTextEditCustomerComment = view.findViewById(R.id.editTextEditCustomerComment)
         fabDeleteOrder = view.findViewById(R.id.fabDeleteOrder)
 
+        val appContext = (activity?.applicationContext as MyApp)
+        textViewCustomerMsg.text = appContext.info.orderId
+
 
 
 
 
         fabDeleteOrder.setOnClickListener {
+            appContext.info.deleteOrder()
             view.findNavController().navigate(R.id.action_editOrderFragment_to_newOrderFragment2)
         }
     }

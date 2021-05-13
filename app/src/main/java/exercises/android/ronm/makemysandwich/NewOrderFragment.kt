@@ -60,9 +60,6 @@ class NewOrderFragment : Fragment(R.layout.fragment_new_order) {
         // load name into customer-name text view and edit text
         textViewCustomerName.text = appContext.info.customerName
         editTextCustomerName.setText(appContext.info.customerName)
-        // disable finish-edit button and customer name edit text
-        fabFinishEditName.visibility = View.INVISIBLE
-        editTextCustomerName.visibility = View.INVISIBLE
         initCustomerName()
 
 
@@ -96,6 +93,8 @@ class NewOrderFragment : Fragment(R.layout.fragment_new_order) {
             // update text-view with name and store the name in application-class
             textViewCustomerName.text = "Welcome back, $nameTyped" // TODO extract resource (used twice)
             appContext.info.customerName = nameTyped
+            appContext.info.saveToSP()
+
             // hide the keyboard after editing
             hideSoftKeyboard(editTextCustomerName)
             // enable order-views after user has set a valid name
@@ -114,17 +113,23 @@ class NewOrderFragment : Fragment(R.layout.fragment_new_order) {
     /** Called once when the fragment's layout is created */
     private fun initCustomerName() {
         // get name from application-class
+//        val name = appContext.info.customerName
+        val orderId = appContext.info.orderId
         val name = appContext.info.customerName
         if (name == "")
         {
+            fabStartEditName.visibility = View.INVISIBLE
+            fabFinishEditName.visibility = View.VISIBLE
             editTextCustomerName.visibility = View.VISIBLE
             textViewCustomerName.visibility = View.INVISIBLE
         }
         else
         {
+            fabStartEditName.visibility = View.VISIBLE
+            fabFinishEditName.visibility = View.INVISIBLE
             editTextCustomerName.visibility = View.INVISIBLE
             textViewCustomerName.visibility = View.VISIBLE
-            textViewCustomerName.text = "Welcome back, $name" // TODO extract resource
+            textViewCustomerName.text = "Welcome back, $name." // TODO extract resource
             enableOrderViews()
         }
     }
@@ -136,9 +141,9 @@ class NewOrderFragment : Fragment(R.layout.fragment_new_order) {
         val tahini : Boolean = checkBoxTahini.isChecked
         val customerComment : String = editTextCustomerComment.text.toString()
         val order = Order(customerName, numPickles, hummus, tahini, customerComment)
-        // save the created order id
+        // save the created order id as well
         appContext.info.orderId = order.orderId
-        // TODO upload order info to firestore
+        appContext.info.saveToSP()
         appContext.info.addOrder(order)
     }
 
