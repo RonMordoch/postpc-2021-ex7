@@ -9,65 +9,117 @@
 
     <EditText
         android:id="@+id/editTextCustomerName"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:textSize="20sp"
         android:hint="@string/customer_name_prompt"
+        android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/checkBoxHummus"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/fabStartEditName"
+    />
+
+    <TextView
+        android:id="@+id/textViewCustomerName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/fabStartEditName"
         />
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabStartEditName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_baseline_edit_24"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabFinishEditName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_baseline_done_24"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"/>
+
 
 
     <CheckBox
         android:id="@+id/checkBoxHummus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
         android:text="Hummus"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editTextCustomerName"
-        />
+        app:layout_constraintTop_toBottomOf="@id/editTextCustomerName" />
 
 
     <CheckBox
         android:id="@+id/checkBoxTahini"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
         android:text="Tahini"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/checkBoxHummus"
-        />
+        app:layout_constraintTop_toBottomOf="@id/checkBoxHummus" />
 
     <TextView
         android:id="@+id/textViewPickles"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="How many pickles would you like?"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/checkBoxTahini"
-        android:text="How many pickles would you like?"
-        />
+        app:layout_constraintTop_toBottomOf="@id/checkBoxTahini" />
 
     <com.google.android.material.slider.Slider
         android:id="@+id/sliderPickles"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/textViewPickles"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
         android:stepSize="1"
         android:valueFrom="0"
         android:valueTo="10"
-    />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewPickles" />
 
 
     <EditText
         android:id="@+id/editTextCustomerComment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/customer_comment_prompt"
-        app:layout_constraintStart_toStartOf="parent"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
+        android:hint="@string/customer_comment_prompt"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/sliderPickles" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -77,7 +129,6 @@
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="@+id/editTextCustomerComment"
         app:layout_constraintTop_toBottomOf="@+id/editTextCustomerComment"
-        app:srcCompat="@drawable/ic_baseline_arrow_forward_24"
-/>
+        app:srcCompat="@drawable/ic_baseline_arrow_forward_24" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
