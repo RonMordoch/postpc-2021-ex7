@@ -28,7 +28,7 @@ class UserInfoStore(context: Context) {
         customerName = sp.getString(SP_CUSTOMER_NAME_KEY, "").toString()
     }
 
-    fun saveToSP() {
+    private fun saveToSP() {
         val editor = sp.edit()
         editor.clear()
         editor.putString(SP_ORDER_ID_KEY, orderId)
@@ -39,6 +39,7 @@ class UserInfoStore(context: Context) {
     fun addOrder(order: Order) {
         val db = Firebase.firestore
         orderId = order.orderId
+        saveToSP()
         db.collection("orders").document(order.orderId).set(order)
     }
 

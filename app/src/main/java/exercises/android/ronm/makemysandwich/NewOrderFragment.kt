@@ -93,7 +93,6 @@ class NewOrderFragment : Fragment(R.layout.fragment_new_order) {
             // update text-view with name and store the name in application-class
             textViewCustomerName.text = "Welcome back, $nameTyped" // TODO extract resource (used twice)
             appContext.info.customerName = nameTyped
-            appContext.info.saveToSP()
 
             // hide the keyboard after editing
             hideSoftKeyboard(editTextCustomerName)
@@ -114,7 +113,6 @@ class NewOrderFragment : Fragment(R.layout.fragment_new_order) {
     private fun initCustomerName() {
         // get name from application-class
 //        val name = appContext.info.customerName
-        val orderId = appContext.info.orderId
         val name = appContext.info.customerName
         if (name == "")
         {
@@ -141,9 +139,7 @@ class NewOrderFragment : Fragment(R.layout.fragment_new_order) {
         val tahini : Boolean = checkBoxTahini.isChecked
         val customerComment : String = editTextCustomerComment.text.toString()
         val order = Order(customerName, numPickles, hummus, tahini, customerComment)
-        // save the created order id as well
-        appContext.info.orderId = order.orderId
-        appContext.info.saveToSP()
+        // saves the created order id as well
         appContext.info.addOrder(order)
     }
 
