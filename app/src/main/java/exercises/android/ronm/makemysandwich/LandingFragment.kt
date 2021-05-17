@@ -44,6 +44,9 @@ class LandingFragment : Fragment() {
                 Order.Status.DONE -> {
                     navController.navigate(R.id.action_landingFragment_to_orderReadyFragment)
                 }
+                else -> { // safety case, navigate to new order fragment
+                    navController.navigate(R.id.action_landingFragment_to_newOrderFragment)
+                }
             }
         }
 

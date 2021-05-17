@@ -22,7 +22,8 @@ class OrderInProgressFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val appContext = (activity?.applicationContext as MyApp)
-        val docRef = appContext.info.db.collection("orders").document(appContext.info.orderId)
+        val docRef =
+            appContext.info.db.collection(FIREBASE_DB_NAME).document(appContext.info.orderId)
         docRef.addSnapshotListener { snapshot, e ->
             if (e != null) { // listen failed
                 return@addSnapshotListener
@@ -33,8 +34,6 @@ class OrderInProgressFragment : Fragment() {
                     view.findNavController()
                         .navigate(R.id.action_orderInProgressFragment_to_orderReadyFragment)
                 }
-
-
             } else { // listener returns null
                 return@addSnapshotListener
             }

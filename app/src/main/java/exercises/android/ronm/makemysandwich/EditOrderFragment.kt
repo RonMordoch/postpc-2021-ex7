@@ -51,8 +51,9 @@ class EditOrderFragment : Fragment() {
         textViewCustomerMsg.visibility = View.VISIBLE
         disableOrderEdit()
         // fetch the order data
+
         val appContext = (activity?.applicationContext as MyApp)
-        val docRef = appContext.info.db.collection("orders").document(appContext.info.orderId)
+        val docRef = appContext.info.db.collection(FIREBASE_DB_NAME).document(appContext.info.orderId)
         docRef.addSnapshotListener { snapshot, e ->
             if (e != null) { // listen failed
                 return@addSnapshotListener
@@ -89,7 +90,7 @@ class EditOrderFragment : Fragment() {
     }
 
     private fun disableOrderEdit() {
-        textViewCustomerMsg.text = "Please wait while we load your order.."
+        textViewCustomerMsg.text = getString(R.string.loading_order_edit_fragment)
         progressBarLoadingData.visibility = View.VISIBLE
         checkBoxEditHummus.visibility = View.INVISIBLE
         checkBoxEditTahini.visibility = View.INVISIBLE
@@ -102,7 +103,7 @@ class EditOrderFragment : Fragment() {
 
 
     private fun enableOrderEdit() {
-        textViewCustomerMsg.text = "Feel free to edit your order before we start making it!"
+        textViewCustomerMsg.text = getString(R.string.msg_edit_order_fragment)
         progressBarLoadingData.visibility = View.INVISIBLE
         checkBoxEditHummus.visibility = View.VISIBLE
         checkBoxEditTahini.visibility = View.VISIBLE

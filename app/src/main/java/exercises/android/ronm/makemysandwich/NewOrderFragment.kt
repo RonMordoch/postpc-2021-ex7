@@ -81,7 +81,7 @@ class NewOrderFragment : Fragment(R.layout.fragment_new_order) {
             val nameTyped = editTextCustomerName.text.toString()
             if (nameTyped == "")
             {
-                editTextCustomerName.error = "Name cannot be empty!" // todo extract resource
+                editTextCustomerName.error = getString(R.string.customer_name_error_msg)
                 return@setOnClickListener
             }
             // animate the finish button out and the edit button in
@@ -91,7 +91,7 @@ class NewOrderFragment : Fragment(R.layout.fragment_new_order) {
             editTextCustomerName.visibility = View.INVISIBLE
             textViewCustomerName.visibility = View.VISIBLE
             // update text-view with name and store the name in application-class
-            textViewCustomerName.text = "Welcome back, $nameTyped" // TODO extract resource (used twice)
+            textViewCustomerName.text = getString(R.string.customer_name_welcome_msg, nameTyped)
             appContext.info.customerName = nameTyped
 
             // hide the keyboard after editing
@@ -125,7 +125,7 @@ class NewOrderFragment : Fragment(R.layout.fragment_new_order) {
             fabFinishEditName.visibility = View.INVISIBLE
             editTextCustomerName.visibility = View.INVISIBLE
             textViewCustomerName.visibility = View.VISIBLE
-            textViewCustomerName.text = "Welcome back, $name." // TODO extract resource
+            textViewCustomerName.text = getString(R.string.customer_name_welcome_msg, name)
             enableOrderViews()
         }
     }
