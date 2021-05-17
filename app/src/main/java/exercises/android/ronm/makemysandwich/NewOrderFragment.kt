@@ -111,8 +111,6 @@ class NewOrderFragment : Fragment(R.layout.fragment_new_order) {
 
     /** Called once when the fragment's layout is created */
     private fun initCustomerName() {
-        // get name from application-class
-//        val name = appContext.info.customerName
         val name = appContext.info.customerName
         if (name == "")
         {

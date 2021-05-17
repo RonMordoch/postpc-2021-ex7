@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/newOrderFragment">
+    app:startDestination="@id/landingFragment">
 
     <fragment
         android:id="@+id/newOrderFragment"
@@ -50,6 +50,34 @@
         tools:layout="@layout/fragment_order_ready" >
         <action
             android:id="@+id/action_orderReadyFragment_to_newOrderFragment"
-            app:destination="@id/newOrderFragment" />
+            app:destination="@id/newOrderFragment"
+            app:popUpTo="@id/orderReadyFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/landingFragment"
+        android:name="exercises.android.ronm.makemysandwich.LandingFragment"
+        android:label="fragment_landing"
+        tools:layout="@layout/fragment_landing" >
+        <action
+            android:id="@+id/action_landingFragment_to_newOrderFragment"
+            app:destination="@id/newOrderFragment"
+            app:popUpTo="@id/landingFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_landingFragment_to_editOrderFragment"
+            app:destination="@id/editOrderFragment"
+            app:popUpTo="@id/landingFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_landingFragment_to_orderInProgressFragment"
+            app:destination="@id/orderInProgressFragment"
+            app:popUpTo="@id/landingFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_landingFragment_to_orderReadyFragment"
+            app:destination="@id/orderReadyFragment"
+            app:popUpTo="@id/landingFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>

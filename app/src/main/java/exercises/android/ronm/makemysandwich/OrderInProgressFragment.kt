@@ -5,27 +5,41 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
+import com.google.firebase.firestore.ktx.toObject
 
 
-/**
- * A simple [Fragment] subclass.
- * Use the [OrderInProgressFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class OrderInProgressFragment : Fragment() {
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_order_in_progress, container, false)
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val appContext = (activity?.applicationContext as MyApp)
+        val docRef = appContext.info.db.collection("orders").document(appContext.info.orderId)
+        docRef.addSnapshotListener { snapshot, e ->
+            if (e != null) { // listen failed
+                return@addSnapshotListener
+            }
+            if (snapshot != null && snapshot.exists()) { // listen succeeded
+                val order = snapshot.toObject<Order>()
+                if (order?.status == Order.Status.DONE) { // order status moved to IN_PROGRESS, cant make changes anymore
+                    view.findNavController()
+                        .navigate(R.id.action_orderInProgressFragment_to_orderReadyFragment)
+                }
+
+
+            } else { // listener returns null
+                return@addSnapshotListener
+            }
+        }
+    }
+
 
 }

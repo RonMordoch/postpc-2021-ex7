@@ -1,10 +1,10 @@
 package exercises.android.ronm.makemysandwich
 
-class Order(var customerName: String,
-            var numPickles : Int,
-            var hummus : Boolean,
-            var tahini: Boolean,
-            var customerComment : String) {
+class Order(var customerName: String = "",
+            var numPickles : Int = 0,
+            var hummus : Boolean = false,
+            var tahini: Boolean = false,
+            var customerComment : String = "") {
 
     enum class Status {WAITING, IN_PROGRESS, READY, DONE}
     val orderId : String

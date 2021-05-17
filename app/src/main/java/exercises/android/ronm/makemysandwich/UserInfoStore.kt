@@ -3,20 +3,20 @@ package exercises.android.ronm.makemysandwich
 import android.content.Context
 import android.content.SharedPreferences
 import android.preference.PreferenceManager
-import com.google.android.gms.tasks.Task
-import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 
 const val SP_CUSTOMER_NAME_KEY = "customer_name"
 const val SP_ORDER_ID_KEY = "order_id"
+const val FIREBASE_DB_NAME = "orders"
 
 class UserInfoStore(context: Context) {
 
     var orderId: String = ""
     var customerName: String = ""
 
+    val db = Firebase.firestore
     private val sp: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
 
     init {
@@ -37,34 +37,18 @@ class UserInfoStore(context: Context) {
     }
 
     fun addOrder(order: Order) {
-        val db = Firebase.firestore
         orderId = order.orderId
         saveToSP()
-        db.collection("orders").document(order.orderId).set(order)
+        db.collection(FIREBASE_DB_NAME).document(order.orderId).set(order)
     }
 
-    fun deleteOrder(){
-        val db = Firebase.firestore
-        db.collection("orders").document(orderId).delete()
-        orderId = ""
-        saveToSP()
+    fun deleteOrder() {
+        if (orderId != "") { // avoid subsequent calls to delete when no order exists
+            db.collection(FIREBASE_DB_NAME).document(orderId).delete()
+            orderId = ""
+            saveToSP()
+        }
     }
 
-//    fun getOrder(orderId: String) {
-//        val db = Firebase.firestore
-//        if (orderId != "") {
-//            val orderRef = db.collection("orders").get().addOnCompleteListener { task: Task<QuerySnapshot> ->
-//                    val result = task.result
-//                    if (task.isSuccessful && result != null) {
-//                        for (document in result) {
-//                            val documentId = document.id
-//                            if (documentId == orderId) {
-//                                val order = document.toObject(Order::class.java)
-//                                ;
-//                            }
-//                        }
-//                    }
-//                }
-//        }
 
-    }
+}
