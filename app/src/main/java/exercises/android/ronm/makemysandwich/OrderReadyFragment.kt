@@ -1,7 +1,6 @@
 package exercises.android.ronm.makemysandwich
 
-import android.animation.AnimatorInflater
-import android.animation.ObjectAnimator
+
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -24,7 +23,7 @@ class OrderReadyFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
+        // find the collect order button, upon click delete the order from db and move to the new order fragment
         val fabCollectOrder: FloatingActionButton = view.findViewById(R.id.fabCollectOrder)
         fabCollectOrder.setOnClickListener {
             val appContext = (activity?.applicationContext as MyApp)

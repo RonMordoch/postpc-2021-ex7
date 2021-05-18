@@ -65,40 +65,12 @@ class NewOrderFragment : Fragment(R.layout.fragment_new_order) {
 
         fabStartEditName.setOnClickListener {
             // disable order views when editing name in order to force user to order only when having a valid name
-            disableOrderViews()
-            // animate the edit button out and the finish button in
-            fadeOutAnimation(fabStartEditName)
-            fadeInAnimation(fabFinishEditName)
-            // enable editing
-            textViewCustomerName.visibility = View.INVISIBLE
-            editTextCustomerName.visibility = View.VISIBLE
-            // pop up the keyboard
-            showSoftKeyboard(editTextCustomerName)
+            startEditName()
         }
 
         fabFinishEditName.setOnClickListener {
             // get the text from edit-text, if it is empty force user to enter a valid name
-            val nameTyped = editTextCustomerName.text.toString()
-            if (nameTyped == "")
-            {
-                editTextCustomerName.error = getString(R.string.customer_name_error_msg)
-                return@setOnClickListener
-            }
-            // animate the finish button out and the edit button in
-            fadeOutAnimation(fabFinishEditName)
-            fadeInAnimation(fabStartEditName)
-            // disable editing
-            editTextCustomerName.visibility = View.INVISIBLE
-            textViewCustomerName.visibility = View.VISIBLE
-            // update text-view with name and store the name in application-class
-            textViewCustomerName.text = getString(R.string.customer_name_welcome_msg, nameTyped)
-            appContext.info.customerName = nameTyped
-
-            // hide the keyboard after editing
-            hideSoftKeyboard(editTextCustomerName)
-            // enable order-views after user has set a valid name
-            enableOrderViews()
-
+            finishEditName()
         }
 
 
@@ -112,15 +84,12 @@ class NewOrderFragment : Fragment(R.layout.fragment_new_order) {
     /** Called once when the fragment's layout is created */
     private fun initCustomerName() {
         val name = appContext.info.customerName
-        if (name == "")
-        {
+        if (name == "") {
             fabStartEditName.visibility = View.INVISIBLE
             fabFinishEditName.visibility = View.VISIBLE
             editTextCustomerName.visibility = View.VISIBLE
             textViewCustomerName.visibility = View.INVISIBLE
-        }
-        else
-        {
+        } else {
             fabStartEditName.visibility = View.VISIBLE
             fabFinishEditName.visibility = View.INVISIBLE
             editTextCustomerName.visibility = View.INVISIBLE
@@ -130,12 +99,48 @@ class NewOrderFragment : Fragment(R.layout.fragment_new_order) {
         }
     }
 
+
+    private fun startEditName() {
+        disableOrderViews()
+        // animate the edit button out and the finish button in
+        fadeOutAnimation(fabStartEditName)
+        fadeInAnimation(fabFinishEditName)
+        // enable editing
+        textViewCustomerName.visibility = View.INVISIBLE
+        editTextCustomerName.visibility = View.VISIBLE
+        // pop up the keyboard
+        showSoftKeyboard(editTextCustomerName)
+    }
+
+    private fun finishEditName() {
+        val nameTyped = editTextCustomerName.text.toString()
+        if (nameTyped == "") {
+            editTextCustomerName.error = getString(R.string.customer_name_error_msg)
+            return
+        }
+        // animate the finish button out and the edit button in
+        fadeOutAnimation(fabFinishEditName)
+        fadeInAnimation(fabStartEditName)
+        // disable editing
+        editTextCustomerName.visibility = View.INVISIBLE
+        textViewCustomerName.visibility = View.VISIBLE
+        // update text-view with name and store the name in application-class
+        textViewCustomerName.text = getString(R.string.customer_name_welcome_msg, nameTyped)
+        appContext.info.customerName = nameTyped
+
+        // hide the keyboard after editing
+        hideSoftKeyboard(editTextCustomerName)
+        // enable order-views after user has set a valid name
+        enableOrderViews()
+    }
+
+
     private fun createOrder() {
-        val customerName : String = editTextCustomerName.text.toString()
-        val numPickles : Int = sliderPickles.value.toInt()
-        val hummus : Boolean = checkBoxHummus.isChecked
-        val tahini : Boolean = checkBoxTahini.isChecked
-        val customerComment : String = editTextCustomerComment.text.toString()
+        val customerName: String = editTextCustomerName.text.toString()
+        val numPickles: Int = sliderPickles.value.toInt()
+        val hummus: Boolean = checkBoxHummus.isChecked
+        val tahini: Boolean = checkBoxTahini.isChecked
+        val customerComment: String = editTextCustomerComment.text.toString()
         val order = Order(customerName, numPickles, hummus, tahini, customerComment)
         // saves the created order id as well
         appContext.info.addOrder(order)

@@ -3,6 +3,7 @@ package exercises.android.ronm.makemysandwich
 import android.content.Context
 import android.content.SharedPreferences
 import android.preference.PreferenceManager
+import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -16,11 +17,15 @@ class UserInfoStore(context: Context) {
     var orderId: String = ""
     var customerName: String = ""
 
-    val db = Firebase.firestore
+    private val db = Firebase.firestore
     private val sp: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
 
     init {
         loadFromSP()
+    }
+
+    fun getFireStoreDocRef(): DocumentReference {
+        return db.collection(FIREBASE_DB_NAME).document(orderId)
     }
 
     private fun loadFromSP() {
@@ -37,6 +42,9 @@ class UserInfoStore(context: Context) {
     }
 
     fun addOrder(order: Order) {
+        if (order.orderId == "") { // invalid call with an invalid order
+            return
+        }
         orderId = order.orderId
         saveToSP()
         db.collection(FIREBASE_DB_NAME).document(order.orderId).set(order)

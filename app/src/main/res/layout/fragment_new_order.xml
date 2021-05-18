@@ -129,6 +129,7 @@
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="@+id/editTextCustomerComment"
         app:layout_constraintTop_toBottomOf="@+id/editTextCustomerComment"
-        app:srcCompat="@drawable/ic_baseline_arrow_forward_24" />
+        app:srcCompat="@drawable/ic_baseline_arrow_forward_24"
+        android:contentDescription="@string/fab_create_order_description" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

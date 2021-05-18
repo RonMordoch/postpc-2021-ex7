@@ -9,6 +9,7 @@ import android.widget.*
 import androidx.navigation.findNavController
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.slider.Slider
+import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.firestore.ktx.toObject
 
 
@@ -23,6 +24,7 @@ class EditOrderFragment : Fragment() {
     private lateinit var editTextEditCustomerComment: EditText
     private lateinit var fabDeleteOrder: FloatingActionButton
     private lateinit var btnSaveOrderEdit: Button
+    private lateinit var liveQuery: ListenerRegistration
     private var order: Order? = null
 
 
@@ -47,14 +49,14 @@ class EditOrderFragment : Fragment() {
         btnSaveOrderEdit = view.findViewById(R.id.buttonSaveOrderEdit)
         fabDeleteOrder = view.findViewById(R.id.fabDeleteOrder)
 
-        // set the loading data message and progress bar
+        // set the loading data message and progress bar, disable order edit untill we fetch data from db
         textViewCustomerMsg.visibility = View.VISIBLE
         disableOrderEdit()
-        // fetch the order data
 
+        // fetch the order data from db
         val appContext = (activity?.applicationContext as MyApp)
-        val docRef = appContext.info.db.collection(FIREBASE_DB_NAME).document(appContext.info.orderId)
-        docRef.addSnapshotListener { snapshot, e ->
+        val docRef = appContext.info.getFireStoreDocRef()
+        liveQuery = docRef.addSnapshotListener { snapshot, e ->
             if (e != null) { // listen failed
                 return@addSnapshotListener
             }
@@ -62,12 +64,9 @@ class EditOrderFragment : Fragment() {
                 order = snapshot.toObject<Order>()
                 // check for both IN_PROGRESS, DONE because order might be ready immediately
                 if (order?.status == Order.Status.IN_PROGRESS || order?.status == Order.Status.DONE) {
-                    // cant make changes anymore, navigate forward
-                    view.findNavController()
-                        .navigate(R.id.action_editOrderFragment_to_orderInProgressFragment)
+                    view.findNavController().navigate(R.id.action_editOrderFragment_to_orderInProgressFragment)
                 }
-                // else we finished loading data, enable edit
-                enableOrderEdit()
+                enableOrderEdit() // else finished loading data, enable edit
                 loadOrderToViews()
 
             } else { // listener returns null
@@ -76,11 +75,7 @@ class EditOrderFragment : Fragment() {
         }
 
         btnSaveOrderEdit.setOnClickListener {
-            order?.hummus = checkBoxEditHummus.isChecked
-            order?.tahini = checkBoxEditTahini.isChecked
-            order?.numPickles = sliderEditPickles.value.toInt()
-            order?.customerComment = editTextEditCustomerComment.text.toString()
-            order?.let { it1 -> appContext.info.addOrder(it1) }
+            saveOrderEdit(appContext)
         }
 
         fabDeleteOrder.setOnClickListener {
@@ -88,6 +83,16 @@ class EditOrderFragment : Fragment() {
             view.findNavController().navigate(R.id.action_editOrderFragment_to_newOrderFragment2)
         }
     }
+
+    /** Saves the edited order to the application class */
+    private fun saveOrderEdit(appContext: MyApp) {
+        order?.hummus = checkBoxEditHummus.isChecked
+        order?.tahini = checkBoxEditTahini.isChecked
+        order?.numPickles = sliderEditPickles.value.toInt()
+        order?.customerComment = editTextEditCustomerComment.text.toString()
+        order?.let { it1 -> appContext.info.addOrder(it1) }
+    }
+
 
     private fun disableOrderEdit() {
         textViewCustomerMsg.text = getString(R.string.loading_order_edit_fragment)
@@ -119,6 +124,11 @@ class EditOrderFragment : Fragment() {
         checkBoxEditTahini.isChecked = order?.tahini ?: false
         sliderEditPickles.value = (order?.numPickles ?: 0).toFloat()
         editTextEditCustomerComment.setText(order?.customerComment ?: "")
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        liveQuery.remove() // remove the snapshot listener when fragment is destroyed upon navigation
     }
 
 

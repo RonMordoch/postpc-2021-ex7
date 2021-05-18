@@ -6,10 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
+import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.firestore.ktx.toObject
 
 
 class OrderInProgressFragment : Fragment() {
+
+    private lateinit var liveQuery: ListenerRegistration
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -22,9 +25,8 @@ class OrderInProgressFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val appContext = (activity?.applicationContext as MyApp)
-        val docRef =
-            appContext.info.db.collection(FIREBASE_DB_NAME).document(appContext.info.orderId)
-        docRef.addSnapshotListener { snapshot, e ->
+        val docRef = appContext.info.getFireStoreDocRef()
+        liveQuery = docRef.addSnapshotListener { snapshot, e ->
             if (e != null) { // listen failed
                 return@addSnapshotListener
             }
@@ -38,6 +40,12 @@ class OrderInProgressFragment : Fragment() {
                 return@addSnapshotListener
             }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        liveQuery.remove() // remove the snapshot listener when fragment is destroyed upon navigation
+
     }
 
 

@@ -11,7 +11,6 @@ import com.google.firebase.firestore.ktx.toObject
 
 class LandingFragment : Fragment() {
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -26,12 +25,13 @@ class LandingFragment : Fragment() {
         val navHostFragment =
             activity?.supportFragmentManager?.findFragmentById(R.id.navHostFragment) as NavHostFragment
         val navController = navHostFragment.navController
+        // no order yet, navigate to new order fragment
         if (appContext.info.orderId == "") {
             navController.navigate(R.id.action_landingFragment_to_newOrderFragment)
             return
         }
-
-        val docRef = appContext.info.db.collection("orders").document(appContext.info.orderId)
+        // listen once and then navigate to the relevant fragment
+        val docRef = appContext.info.getFireStoreDocRef()
         docRef.get().addOnSuccessListener { documentSnapshot ->
             val order = documentSnapshot.toObject<Order>()
             when (order?.status) {
@@ -51,7 +51,6 @@ class LandingFragment : Fragment() {
         }
 
     }
-
 
 
 }

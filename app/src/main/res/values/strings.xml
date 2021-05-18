@@ -6,4 +6,5 @@
     <string name="customer_name_welcome_msg">Welcome back, %1$s.</string>
     <string name="loading_order_edit_fragment">Please wait while we load your order..</string>
     <string name="msg_edit_order_fragment">Feel free to edit your order before we start making it!</string>
+    <string name="fab_create_order_description">Create order</string>
 </resources>
