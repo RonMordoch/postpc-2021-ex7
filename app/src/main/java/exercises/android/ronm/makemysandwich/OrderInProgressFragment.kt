@@ -32,7 +32,7 @@ class OrderInProgressFragment : Fragment() {
             }
             if (snapshot != null && snapshot.exists()) { // listen succeeded
                 val order = snapshot.toObject<Order>()
-                if (order?.status == Order.Status.DONE) { // order status moved to IN_PROGRESS, cant make changes anymore
+                if (order?.status == Order.Status.READY) { // order status moved to READY, enable collection
                     view.findNavController()
                         .navigate(R.id.action_orderInProgressFragment_to_orderReadyFragment)
                 }

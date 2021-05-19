@@ -63,7 +63,7 @@ class EditOrderFragment : Fragment() {
             if (snapshot != null && snapshot.exists()) { // listen succeeded
                 order = snapshot.toObject<Order>()
                 // check for both IN_PROGRESS, DONE because order might be ready immediately
-                if (order?.status == Order.Status.IN_PROGRESS || order?.status == Order.Status.DONE) {
+                if (order?.status == Order.Status.IN_PROGRESS || order?.status == Order.Status.READY) {
                     view.findNavController().navigate(R.id.action_editOrderFragment_to_orderInProgressFragment)
                 }
                 enableOrderEdit() // else finished loading data, enable edit

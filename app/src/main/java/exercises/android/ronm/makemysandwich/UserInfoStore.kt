@@ -51,6 +51,16 @@ class UserInfoStore(context: Context) {
         db.collection(FIREBASE_DB_NAME).document(order.orderId).set(order)
     }
 
+    fun markOrderDone(order: Order?) {
+        if (order == null || orderId == "") {
+            return
+        }
+        // else override order and reset the order current order id
+        db.collection(FIREBASE_DB_NAME).document(orderId).set(order)
+        orderId = ""
+        saveToSP()
+    }
+
     fun deleteOrder() {
         if (orderId != "") { // avoid subsequent calls to delete when no order exists
             db.collection(FIREBASE_DB_NAME).document(orderId).delete()
@@ -58,6 +68,6 @@ class UserInfoStore(context: Context) {
             saveToSP()
         }
     }
-
-
 }
+
+

@@ -41,10 +41,10 @@ class LandingFragment : Fragment() {
                 Order.Status.IN_PROGRESS -> {
                     navController.navigate(R.id.action_landingFragment_to_orderInProgressFragment)
                 }
-                Order.Status.DONE -> {
+                Order.Status.READY -> {
                     navController.navigate(R.id.action_landingFragment_to_orderReadyFragment)
                 }
-                else -> { // safety case, navigate to new order fragment
+                else -> { // either DONE on unexpected enum value, navigate to new order fragment
                     navController.navigate(R.id.action_landingFragment_to_newOrderFragment)
                 }
             }
