@@ -127,7 +127,6 @@ class NewOrderFragment : Fragment(R.layout.fragment_new_order) {
         // update text-view with name and store the name in application-class
         textViewCustomerName.text = getString(R.string.customer_name_welcome_msg, nameTyped)
         appContext.info.customerName = nameTyped
-
         // hide the keyboard after editing
         hideSoftKeyboard(editTextCustomerName)
         // enable order-views after user has set a valid name

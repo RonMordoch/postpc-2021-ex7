@@ -80,7 +80,7 @@ class UserInfoStore(context: Context) {
         // update orderId and save to SP
         orderId = order.orderId
         saveToSP()
-        // create document in firestore database, update livedata and set listener
+        // create document in database, update livedata and set listener
         db.collection(FIREBASE_DB_NAME).document(order.orderId).set(order)
         orderLiveData.value = order
         setOrderFirestoreListener()
@@ -99,13 +99,14 @@ class UserInfoStore(context: Context) {
         if (orderId == "") {
             return
         }
-        // else mark order as done, reset the order current order id and remove listener
         val doneOrder = orderLiveData.value
         if (doneOrder != null) {
-            orderId = ""
-            saveToSP()
+            // mark order as done and upload changes
             doneOrder.status = Order.Status.DONE
             db.collection(FIREBASE_DB_NAME).document(orderId).set(doneOrder)
+            // reset order id and save
+            orderId = ""
+            saveToSP()
             removeOrderFirestoreListener()
         }
 
@@ -113,12 +114,12 @@ class UserInfoStore(context: Context) {
 
     fun deleteOrder() {
         if (orderId != "") { // avoid subsequent calls to delete when no order exists
-            // reset the current order id, remove listener and delete from database
-            orderId = ""
-            saveToSP()
+            // remove listener and remove order from db
             removeOrderFirestoreListener()
             db.collection(FIREBASE_DB_NAME).document(orderId).delete()
-
+            // reset orderId only after deleting order
+            orderId = ""
+            saveToSP()
         }
     }
 }
