@@ -12,14 +12,19 @@ import com.google.firebase.ktx.Firebase
 const val SP_CUSTOMER_NAME_KEY = "customer_name"
 const val SP_ORDER_ID_KEY = "order_id"
 const val FIREBASE_DB_NAME = "orders"
+const val SP_KEY = "USER_SP"
 
 class UserInfoStore(context: Context) {
 
     var orderId: String = ""
     var customerName: String = ""
+    set(value) {
+        field = value
+        saveToSP()
+    }
 
     private val db = Firebase.firestore
-    private val sp: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+    private val sp: SharedPreferences = context.getSharedPreferences(SP_KEY, Context.MODE_PRIVATE)
 
     init {
         loadFromSP()
