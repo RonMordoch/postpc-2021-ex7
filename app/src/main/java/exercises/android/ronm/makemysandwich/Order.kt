@@ -1,6 +1,6 @@
 package exercises.android.ronm.makemysandwich
 
-class Order(var customerName: String = "",
+data class Order(var customerName: String = "",
             var numPickles : Int = 0,
             var hummus : Boolean = false,
             var tahini: Boolean = false,

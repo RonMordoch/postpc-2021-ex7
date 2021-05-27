@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.slider.Slider
@@ -24,7 +25,6 @@ class EditOrderFragment : Fragment() {
     private lateinit var editTextEditCustomerComment: EditText
     private lateinit var fabDeleteOrder: FloatingActionButton
     private lateinit var btnSaveOrderEdit: Button
-    private lateinit var liveQuery: ListenerRegistration
     private var order: Order? = null
 
 
@@ -55,24 +55,15 @@ class EditOrderFragment : Fragment() {
 
         // fetch the order data from db
         val appContext = (activity?.applicationContext as MyApp)
-        val docRef = appContext.info.getFireStoreDocRef()
-        liveQuery = docRef.addSnapshotListener { snapshot, e ->
-            if (e != null) { // listen failed
-                return@addSnapshotListener
-            }
-            if (snapshot != null && snapshot.exists()) { // listen succeeded
-                order = snapshot.toObject<Order>()
-                // check for both IN_PROGRESS, DONE because order might be ready immediately
-                if (order?.status == Order.Status.IN_PROGRESS || order?.status == Order.Status.READY) {
+        val orderObserver = Observer<Order?> { orderObserved ->
+            order = orderObserved
+            if (order?.status == Order.Status.IN_PROGRESS || order?.status == Order.Status.READY) {
                     view.findNavController().navigate(R.id.action_editOrderFragment_to_orderInProgressFragment)
                 }
                 enableOrderEdit() // else finished loading data, enable edit
                 loadOrderToViews()
-
-            } else { // listener returns null
-                return@addSnapshotListener
             }
-        }
+        appContext.info.orderLiveData.observe(viewLifecycleOwner, orderObserver)
 
         btnSaveOrderEdit.setOnClickListener {
             saveOrderEdit(appContext)
@@ -90,7 +81,7 @@ class EditOrderFragment : Fragment() {
         order?.tahini = checkBoxEditTahini.isChecked
         order?.numPickles = sliderEditPickles.value.toInt()
         order?.customerComment = editTextEditCustomerComment.text.toString()
-        order?.let { it1 -> appContext.info.addOrder(it1) }
+        order?.let { it1 -> appContext.info.updateOrder(it1) }
     }
 
 
@@ -124,11 +115,6 @@ class EditOrderFragment : Fragment() {
         checkBoxEditTahini.isChecked = order?.tahini ?: false
         sliderEditPickles.value = (order?.numPickles ?: 0).toFloat()
         editTextEditCustomerComment.setText(order?.customerComment ?: "")
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        liveQuery.remove() // remove the snapshot listener when fragment is destroyed upon navigation
     }
 
 
