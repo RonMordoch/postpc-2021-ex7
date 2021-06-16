@@ -1,19 +1,19 @@
-package exercises.android.ronm.makemysandwich
+package exercises.android.ronm.makemysandwich.fragments
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.TextView
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.slider.Slider
+import exercises.android.ronm.makemysandwich.MakeMySandwichApp
+import exercises.android.ronm.makemysandwich.data.Order
+import exercises.android.ronm.makemysandwich.R
 
 class NewOrderFragment : Fragment(R.layout.fragment_new_order) {
 
@@ -27,16 +27,8 @@ class NewOrderFragment : Fragment(R.layout.fragment_new_order) {
     private lateinit var sliderPickles: Slider
     private lateinit var editTextCustomerComment: EditText
     private lateinit var fabCreateOrder: FloatingActionButton
-    private lateinit var appContext: MyApp
+    private lateinit var appContext: MakeMySandwichApp
 
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_new_order, container, false)
-    }
 
     // called after onCreateView
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -53,7 +45,7 @@ class NewOrderFragment : Fragment(R.layout.fragment_new_order) {
         editTextCustomerComment = view.findViewById(R.id.editTextCustomerComment)
         fabCreateOrder = view.findViewById(R.id.fabCreateOrder)
         // get app context
-        appContext = activity?.applicationContext as MyApp
+        appContext = activity?.applicationContext as MakeMySandwichApp
 
         // disable all order views views
         disableOrderViews()

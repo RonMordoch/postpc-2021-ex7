@@ -1,4 +1,4 @@
-package exercises.android.ronm.makemysandwich
+package exercises.android.ronm.makemysandwich.data
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -8,11 +8,6 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 
-
-const val SP_CUSTOMER_NAME_KEY = "customer_name"
-const val SP_ORDER_ID_KEY = "order_id"
-const val FIREBASE_DB_NAME = "orders"
-const val SP_KEY = "USER_SP"
 
 class UserInfoStore(context: Context) {
 
@@ -121,6 +116,13 @@ class UserInfoStore(context: Context) {
             orderId = ""
             saveToSP()
         }
+    }
+
+    companion object {
+        private const val SP_CUSTOMER_NAME_KEY = "customer_name"
+        private const val SP_ORDER_ID_KEY = "order_id"
+        private const val FIREBASE_DB_NAME = "orders"
+        private const val SP_KEY = "USER_SP"
     }
 }
 

@@ -1,20 +1,15 @@
 package exercises.android.ronm.makemysandwich;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
+
 import android.widget.CheckBox;
-import android.widget.EditText;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.FirebaseApp;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 
@@ -54,9 +49,9 @@ public class MainActivityTest
         activityController.create().visible();
         MainActivity activityUnderTest = activityController.get();
         FloatingActionButton fabCreateOrder = activityUnderTest.findViewById(R.id.fabCreateOrder);
-        assertEquals("", ((MyApp) activityUnderTest.getApplication()).info.getOrderId());
+        assertEquals("", ((MakeMySandwichApp) activityUnderTest.getApplication()).info.getOrderId());
         fabCreateOrder.performClick();
-        assertNotEquals("", ((MyApp) activityUnderTest.getApplication()).info.getOrderId());
+        assertNotEquals("", ((MakeMySandwichApp) activityUnderTest.getApplication()).info.getOrderId());
     }
 
 }

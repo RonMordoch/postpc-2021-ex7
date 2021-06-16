@@ -2,9 +2,10 @@ package exercises.android.ronm.makemysandwich
 
 import android.app.Application
 import com.google.firebase.FirebaseApp
+import exercises.android.ronm.makemysandwich.data.UserInfoStore
 
 
-class MyApp : Application() {
+class MakeMySandwichApp : Application() {
 
     lateinit var info: UserInfoStore
 

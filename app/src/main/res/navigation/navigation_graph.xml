@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/newOrderFragment"
-        android:name="exercises.android.ronm.makemysandwich.NewOrderFragment"
+        android:name="exercises.android.ronm.makemysandwich.fragments.NewOrderFragment"
         android:label="fragment_new_order"
         tools:layout="@layout/fragment_new_order" >
         <action
@@ -18,7 +18,7 @@
     </fragment>
     <fragment
         android:id="@+id/editOrderFragment"
-        android:name="exercises.android.ronm.makemysandwich.EditOrderFragment"
+        android:name="exercises.android.ronm.makemysandwich.fragments.EditOrderFragment"
         android:label="fragment_edit_order"
         tools:layout="@layout/fragment_edit_order" >
         <action
@@ -34,7 +34,7 @@
     </fragment>
     <fragment
         android:id="@+id/orderInProgressFragment"
-        android:name="exercises.android.ronm.makemysandwich.OrderInProgressFragment"
+        android:name="exercises.android.ronm.makemysandwich.fragments.OrderInProgressFragment"
         android:label="fragment_order_in_progress"
         tools:layout="@layout/fragment_order_in_progress" >
         <action
@@ -45,7 +45,7 @@
     </fragment>
     <fragment
         android:id="@+id/orderReadyFragment"
-        android:name="exercises.android.ronm.makemysandwich.OrderReadyFragment"
+        android:name="exercises.android.ronm.makemysandwich.fragments.OrderReadyFragment"
         android:label="fragment_order_ready"
         tools:layout="@layout/fragment_order_ready" >
         <action
@@ -56,7 +56,7 @@
     </fragment>
     <fragment
         android:id="@+id/landingFragment"
-        android:name="exercises.android.ronm.makemysandwich.LandingFragment"
+        android:name="exercises.android.ronm.makemysandwich.fragments.LandingFragment"
         android:label="fragment_landing"
         tools:layout="@layout/fragment_landing" >
         <action

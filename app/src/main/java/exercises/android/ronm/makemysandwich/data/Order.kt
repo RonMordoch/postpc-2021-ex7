@@ -1,4 +1,4 @@
-package exercises.android.ronm.makemysandwich
+package exercises.android.ronm.makemysandwich.data
 
 data class Order(var customerName: String = "",
             var numPickles : Int = 0,

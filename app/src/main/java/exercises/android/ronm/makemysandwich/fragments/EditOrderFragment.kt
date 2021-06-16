@@ -1,20 +1,18 @@
-package exercises.android.ronm.makemysandwich
+package exercises.android.ronm.makemysandwich.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.*
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.slider.Slider
-import com.google.firebase.firestore.ListenerRegistration
-import com.google.firebase.firestore.ktx.toObject
+import exercises.android.ronm.makemysandwich.MakeMySandwichApp
+import exercises.android.ronm.makemysandwich.data.Order
+import exercises.android.ronm.makemysandwich.R
 
-
-class EditOrderFragment : Fragment() {
+class EditOrderFragment : Fragment(R.layout.fragment_edit_order) {
 
     private lateinit var textViewCustomerMsg: TextView
     private lateinit var progressBarLoadingData: ProgressBar
@@ -27,13 +25,6 @@ class EditOrderFragment : Fragment() {
     private lateinit var btnSaveOrderEdit: Button
     private var order: Order? = null
 
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_edit_order, container, false)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -54,7 +45,7 @@ class EditOrderFragment : Fragment() {
         disableOrderEdit()
 
         // fetch the order data from db
-        val appContext = (activity?.applicationContext as MyApp)
+        val appContext = (activity?.applicationContext as MakeMySandwichApp)
         val orderObserver = Observer<Order?> { orderObserved ->
             order = orderObserved
             if (order?.status == Order.Status.IN_PROGRESS || order?.status == Order.Status.READY) {
@@ -75,8 +66,7 @@ class EditOrderFragment : Fragment() {
         }
     }
 
-    /** Saves the edited order to the application class */
-    private fun saveOrderEdit(appContext: MyApp) {
+    private fun saveOrderEdit(appContext: MakeMySandwichApp) {
         order?.hummus = checkBoxEditHummus.isChecked
         order?.tahini = checkBoxEditTahini.isChecked
         order?.numPickles = sliderEditPickles.value.toInt()
