@@ -46,7 +46,8 @@
         app:srcCompat="@drawable/ic_baseline_edit_24"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"/>
+        android:layout_marginTop="16dp"
+        android:contentDescription="@string/fab_start_edit_name_desc" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabFinishEditName"
@@ -55,7 +56,8 @@
         app:srcCompat="@drawable/ic_baseline_done_24"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"/>
+        android:layout_marginTop="16dp"
+        android:contentDescription="@string/fab_finish_edit_name_desc" />
 
 
 
@@ -67,7 +69,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:text="Hummus"
+        android:text="@string/check_box_hummus_txt"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/editTextCustomerName" />
 
@@ -80,7 +82,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:text="Tahini"
+        android:text="@string/check_box_tahini_text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/checkBoxHummus" />
 
@@ -92,7 +94,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:text="How many pickles would you like?"
+        android:text="@string/text_view_pickles_msg"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/checkBoxTahini" />

@@ -7,4 +7,16 @@
     <string name="loading_order_edit_fragment">Please wait while we load your order..</string>
     <string name="msg_edit_order_fragment">Feel free to edit your order before we start making it!</string>
     <string name="fab_create_order_description">Create order</string>
+    <string name="check_box_edit_hummus_text">Hummus</string>
+    <string name="check_box_edit_tahini_text">Tahini</string>
+    <string name="text_view_pickles_msg">How many pickles would you like?</string>
+    <string name="fab_delete_order_description">Floating action button: delete order</string>
+    <string name="button_save_edited_order_text">SAVE</string>
+    <string name="fab_start_edit_name_desc">Floating action button: start edit name</string>
+    <string name="fab_finish_edit_name_desc">Floating action button: finish edit name</string>
+    <string name="check_box_hummus_txt">Hummus</string>
+    <string name="check_box_tahini_text">Tahini</string>
+    <string name="text_view_order_in_prog_txt">Rachel is working on your order, she will let you know once it is ready.</string>
+    <string name="text_view_order_ready_txt">Your order is ready! Please collect your order from Rachel.</string>
+    <string name="fab_collect_order_desc">Collect order button</string>
 </resources>

@@ -17,7 +17,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:hint="Rachel is working on your order, she will let you know once it is ready."
+        android:hint="@string/text_view_order_in_prog_txt"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
